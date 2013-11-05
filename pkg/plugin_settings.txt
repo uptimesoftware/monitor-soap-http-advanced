@@ -1,0 +1,8 @@
+name=Advanced HTTP / SOAP Monitor
+version=1.0
+platforms=windows linux solaris
+description=This advanced HTTP monitor is made to handle any type of web service / SOAP / HTTP interfaces. You can customize the HTTP header as well as the body of the (POST) request.
+restartCore=false
+requiresAgentScript=false
+onUpgradeRemoveFiles=true
+onUpgradeRemoveMonitors=false

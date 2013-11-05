@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.0" target_grouping="non-agent">
+	<class> HTTP / Web Services / SOAP (Advanced) </class>
+	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
+	<elements>
+		<element name="process" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options> size:40 </control_options>
+			<default_value>scripts/MonitorHttpSoapAdv/monitor_soap.bat</default_value>
+			<short_description>Script Name</short_description>
+			<long_description>Name of the script/binary/process to be executed by up.time </long_description>
+			<validation_rule><alphanumeric/></validation_rule>
+			<error_message><alphanumeric>required field</alphanumeric></error_message>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name='url_path' parameter_type='input' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value>/web_service.php</default_value>
+			<validation_rule/><error_message/>
+			<short_description>URL Path</short_description>
+			<long_description>The part of the URL that comes after the hostname:port (example: /index.html)</long_description>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name='virtualhost' parameter_type='input' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<validation_rule/><error_message/>
+			<short_description>Virtual Host Name</short_description>
+			<long_description>If the site is on another hostname/IP, enter it here</long_description>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name="port" parameter_type="input" data_type="integer" gui_basic="1" range_type="0">
+			<control_options>size:5</control_options>
+			<default_value>80</default_value>
+			<short_description>Port</short_description>
+			<long_description>The port that the Web server is listening on</long_description>
+			<validation_rule>
+				<integer/>
+			</validation_rule>
+			<error_message>
+			<integer>The port must be an integer value</integer>
+			</error_message>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name="use-ssl" parameter_type="input" data_type="boolean" gui_basic="1" range_type="0">
+			<control_options/>
+			<default_value>false</default_value>
+			<short_description>Use SSL (HTTPS)</short_description>
+			<long_description>Use SSL (HTTPS) to contact web server</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<boolean/>
+			</gui_type>
+		</element>
+		<element name="header" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options>rows:10; cols:80</control_options>
+			<default_value>POST %URL% HTTP/1.1
+Accept-Encoding: text/html
+Content-Type: text/xml;charset=UTF-8
+Content-Length: %CONTENTLENGTH%
+Host: %HOSTNAME%:%PORT%
+User-Agent: PHP-up.time-SOAP-Monitor</default_value>
+			<short_description>HTTP Header (mouseover for variables)</short_description>
+			<long_description>%HOSTNAME% - Hostname of the system
+%PORT% - HTTP port entered
+%URL% - Fully constructed URL (http://hostname:port/url_path)
+%VIRTUALHOST% - Virtual hostname entered
+%CONTENTLENGTH% - Size of the body in bytes</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<textarea/>
+			</gui_type>
+		</element>
+		<element name="body" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options>rows:20; cols:80</control_options>
+			<default_value></default_value>
+			<short_description>HTTP Body (mouseover for variables)</short_description>
+			<long_description>%HOSTNAME% - Hostname of the system
+%PORT% - HTTP port entered
+%URL% - Fully constructed URL (http://hostname:port/url_path)
+%VIRTUALHOST% - Virtual hostname entered</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<textarea/>
+			</gui_type>
+		</element>
+		<element name="textMustAppear" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options>size:15</control_options>
+			<default_value/>
+			<short_description>Text that must appear</short_description>
+			<long_description>Text that must appear</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="textMustNotAppear" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options>size:15</control_options>
+			<default_value/>
+			<short_description>Text that must not appear</short_description>
+			<long_description>Text that must not appear</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		
+		<element name='message' parameter_type='output' data_type='string' gui_basic='' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>Message</short_description>
+			<long_description>Message</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name='response_code' parameter_type='output' data_type='integer' gui_basic='' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value>200</default_value>
+			<short_description>HTTP Response Code</short_description>
+			<long_description>HTTP response code that the web server returns (200 = OK)</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><integer/></gui_type>
+		</element>
+		<element name='response_message' parameter_type='output' data_type='string' gui_basic='' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>HTTP Response Message</short_description>
+			<long_description>HTTP Response Message</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name="timer" parameter_type="output" data_type="integer" gui_basic="0" range_type="0" units="ms">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Response time</short_description>
+			<long_description>Response time in ms</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+	</elements>
+	<help></help>
+</uptime>
