@@ -57,8 +57,7 @@ if (!empty($vhost) && strlen($vhost) > 0) {
 }
 $exit_code = 0;	// 0=OK, 1=WARN, 2=CRIT
 $full_url = "http://{$hostname}:{$port}{$url_path}";
-$full_url = "http://{$vhost}:{$port}{$url_path}";
-
+//$full_url = "http://{$vhost}:{$port}{$url_path}";
 
 // replace the variables in the body
 $body = var_replace($body, '%VIRTUALHOST%', $vhost);
@@ -81,7 +80,7 @@ $header = var_replace($header, '%CONTENTLENGTH%', $body_length);
 $header = trim($header) . "\r\n\r\n";
 
 try {
-	$raw_response = do_request( $hostname, $port, $full_url, $header, $body );
+	$raw_response = do_request( $ssl, $hostname, $port, $full_url, $header, $body );
 	$raw_response = str_replace("\r\n", "\n", $raw_response);
 	$response = trim(substr($raw_response, strpos($raw_response, "\n\n", 0)));
 	
@@ -134,13 +133,17 @@ try {
 
 exit($exit_code);
 
-function do_request( $host, $port, $url, $header, $body, $timeout = 45 ) {
+function do_request( $ssl, $host, $port, $url, $header, $body, $timeout = 45 ) {
 	$response = '';
 	$errorno = 0;
 	$errorstr = '';
 
 	//try {
-		$resource = fsockopen($host, $port, $errorno, $errorstr, $timeout);
+		if ($ssl) {
+			$resource = fsockopen('ssl://' . $host, $port, $errorno, $errorstr, $timeout);
+		} else {
+			$resource = fsockopen($host, $port, $errorno, $errorstr, $timeout);
+		}
 		//Attempt to establish a connection to agent on port 80. On error, place the error number into $errorno, and a string response to $errorstr. Timeout after 10 seconds.
 		if (!$resource) {
 			//fsockopen failed

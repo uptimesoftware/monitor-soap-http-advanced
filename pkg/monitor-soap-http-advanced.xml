@@ -2,7 +2,7 @@
 <uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.0" target_grouping="non-agent">
 	<class>HTTP / Web Services / SOAP (Advanced)</class>
 	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
-	<erdc_version>2.1</erdc_version>
+	<erdc_version>2.2</erdc_version>
 	<category>Applications - Web Services</category>
 	<category_related>Applications - General</category_related>
 	<grid_info>
