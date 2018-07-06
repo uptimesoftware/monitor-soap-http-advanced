@@ -140,7 +140,25 @@ function do_request( $ssl, $host, $port, $url, $header, $body, $timeout = 45 ) {
 
 	//try {
 		if ($ssl) {
-			$resource = fsockopen('ssl://' . $host, $port, $errorno, $errorstr, $timeout);
+//			$context = stream_context_create();
+//			$result = stream_context_set_option($context, 'ssl', 'local_cert', '/etc/ssl/certs/cacert.pem');
+
+$contextOptions = array(
+    'ssl' => array(
+        'verify_peer' => true, // You could skip all of the trouble by changing this to false, but it's WAY uncool for security reasons.
+        'cafile' => '/etc/ssl/certs/cacert.pem',
+        'CN_match' => 'example.com', // Change this to your certificates Common Name (or just comment this line out if not needed)
+        'ciphers' => 'HIGH:!SSLv2:!SSLv3',
+        'disable_compression' => true,
+    )
+);
+
+$context = stream_context_create($contextOptions);
+
+$resource = stream_socket_client("tcp://{$host}:{$port}", $errorno, $errorstr, $timeout, STREAM_CLIENT_CONNECT, $context);
+
+
+//			$resource = fsockopen('ssl://' . $host, $port, $errorno, $errorstr, $timeout);
 		} else {
 			$resource = fsockopen($host, $port, $errorno, $errorstr, $timeout);
 		}
