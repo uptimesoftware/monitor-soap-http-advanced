@@ -2,15 +2,15 @@
 <uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.0" target_grouping="non-agent">
 	<class>HTTP / Web Services / SOAP (Advanced)</class>
 	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
-	<erdc_version>2.2</erdc_version>
-	<category>Applications - Web Services</category>
-	<category_related>Applications - General</category_related>
-	<grid_info>
-		<supported_versions>7.3,7.4,7.5,7.6,7.7,7.8</supported_versions>
-		<supported_platforms>windows, linux</supported_platforms>
-		<upgrade_in_place>true</upgrade_in_place>
-		<requires_agent_scripts>false</requires_agent_scripts>
-	</grid_info>	
+ <erdc_version>2.2</erdc_version>
+ <category>Applications - Web Services</category>
+ <category_related>Applications - General</category_related>
+ <grid_info>
+  <supported_versions>7.3,7.4,7.5,7.6,7.7,7.8</supported_versions>
+  <supported_platforms>windows, linux</supported_platforms>
+  <upgrade_in_place>true</upgrade_in_place>
+  <requires_agent_scripts>false</requires_agent_scripts>
+ </grid_info>	
 	<elements>
 		<element name="process_windows" parameter_type="input" data_type="string" gui_basic="1" range_type="0" hidden="true">
 			<control_options> size:40 </control_options>
